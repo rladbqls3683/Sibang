@@ -1,0 +1,283 @@
+:root {
+  --bg: #f8f7f3;
+  --ink: #0c0c0f;
+  --muted: #54545f;
+  --accent: #1f3b73;
+  --glow: rgba(45, 60, 120, 0.12);
+  --door-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background: radial-gradient(circle at 20% 20%, #ffffff, #f2f1ed 38%, #eceae4 68%);
+  font-family: "Palatino", "Iowan Old Style", "Times New Roman", serif;
+  overflow-y: auto;
+  transition: background 0.6s ease, color 0.6s ease;
+}
+
+body.entering,
+body.in-room {
+  background: radial-gradient(circle at 40% 30%, #0c0c12, #050508 60%, #000000 100%);
+  color: #efeee6;
+}
+
+header {
+  position: fixed;
+  top: 20px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: flex-start;
+  pointer-events: none;
+  z-index: 30;
+}
+
+.logo {
+  height: clamp(48px, 6vw, 76px);
+  width: auto;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.12));
+  mix-blend-mode: multiply;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(18px, 4vw, 36px);
+  align-items: start;
+  justify-items: center;
+  padding: 110px clamp(18px, 6vw, 64px) 80px;
+}
+
+.stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 60% 60%, rgba(0, 0, 0, 0.08), transparent 58%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+  z-index: 1;
+}
+
+body.entering .stage::after,
+body.in-room .stage::after {
+  opacity: 0;
+}
+
+.door {
+  position: relative;
+  width: 320px;
+  height: 520px;
+  cursor: grab;
+  touch-action: none;
+  transition: transform 0.7s ease, filter 0.4s ease, opacity 0.4s ease;
+  filter: none;
+  background: transparent;
+  border-radius: 28px;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.door:active { cursor: grabbing; }
+
+.door:hover {
+  filter: none;
+  transform: translate(var(--tx, 0), var(--ty, 0)) rotate(var(--rot, 0deg)) scale(1.02);
+}
+
+body.entering .door,
+body.in-room .door {
+  opacity: 0.25;
+}
+
+.door.active {
+  opacity: 1;
+  z-index: 60;
+  filter: none;
+}
+
+.door svg {
+  width: 100%;
+  height: 100%;
+}
+
+.door .panel {
+  fill: none;
+  stroke: none;
+}
+
+/* hide path strokes while still using them for textPath layout */
+.door svg path {
+  stroke: none;
+  fill: none;
+  opacity: 0;
+}
+
+.door text {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  fill: var(--accent);
+  text-transform: uppercase;
+}
+
+.poem {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink);
+  letter-spacing: 0.03em;
+  background: transparent;
+  backdrop-filter: none;
+  border-radius: 12px;
+  padding: 12px 16px;
+  max-width: 72%;
+  box-sizing: border-box;
+  box-shadow: none;
+}
+
+.entry-veil {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.82));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+  z-index: 40;
+}
+
+.entry-veil.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.room-layer {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(20px, 5vw, 80px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+  z-index: 70;
+  color: #f3f2ec;
+}
+
+.room-layer.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.room-content {
+  width: min(1200px, 90vw);
+  background: linear-gradient(135deg, rgba(15, 15, 22, 0.85), rgba(11, 11, 18, 0.72));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 32px;
+  padding: clamp(24px, 4vw, 48px);
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(14px);
+}
+
+.room-kicker {
+  margin: 0 0 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.room-title {
+  margin: 0 0 10px;
+  font-size: clamp(32px, 4vw, 48px);
+  letter-spacing: 0.04em;
+}
+
+.room-line {
+  margin: 0 0 26px;
+  font-size: 18px;
+  color: rgba(243, 242, 236, 0.82);
+  max-width: 720px;
+  line-height: 1.6;
+}
+
+.room-body {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: clamp(18px, 4vw, 50px);
+  align-items: start;
+}
+
+.poem-text {
+  font-size: 16px;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  color: #f9f8f2;
+  white-space: pre-line;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  padding-left: clamp(14px, 2vw, 24px);
+}
+
+.side-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.meta h3 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.meta p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.8;
+  color: rgba(245, 245, 237, 0.88);
+}
+
+.back-btn {
+  margin-top: 12px;
+  align-self: flex-start;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #f6f6f0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 1024px) {
+  .room-body { grid-template-columns: 1fr; }
+  .poem-text { border-left: none; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-left: 0; padding-top: 14px; }
+}
+
+@media (max-width: 768px) {
+  .door { width: 270px; height: 430px; }
+  header { flex-direction: column; gap: 10px; }
+  .poem { max-width: 82%; font-size: 13px; }
+}

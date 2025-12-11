@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Door of Poem</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <img class="logo" src="sivang.svg" alt="Door of Poem">
+  </header>
+  <div class="stage" id="stage">
+    <div class="door" data-path="doorPath-lonely" data-room="lonely" data-text="밤을 여는 가장 가벼운 방법은 작은 틈에 숨을 고이는 일">
+      <svg viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+        <use class="panel" href="#doorPath-lonely" />
+        <text>
+          <textPath href="#doorPath-lonely"></textPath>
+        </text>
+      </svg>
+      <div class="poem"></div>
+    </div>
+    <div class="door" data-path="doorPath-love" data-room="love" data-text="사랑은 문지방에 오래 머무르는 발걸음처럼 다정했다">
+      <svg viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+        <use class="panel" href="#doorPath-love" />
+        <text>
+          <textPath href="#doorPath-love"></textPath>
+        </text>
+      </svg>
+      <div class="poem"></div>
+    </div>
+    <div class="door" data-path="doorPath-anxiety" data-room="anxiety" data-text="불안은 두드리는 손끝보다도 먼저 마음속에서 문을 열어젖힌다">
+      <svg viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+        <use class="panel" href="#doorPath-anxiety" />
+        <text>
+          <textPath href="#doorPath-anxiety"></textPath>
+        </text>
+      </svg>
+      <div class="poem"></div>
+    </div>
+    <div class="door" data-path="doorPath-memory-outer" data-room="memory" data-text="기억은 겹겹이 닫히며도 안쪽에서 작게 울리는 빛을 남긴다">
+      <svg viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+        <use class="panel" href="#doorPath-memory-outer" />
+        <text>
+          <textPath href="#doorPath-memory-outer"></textPath>
+        </text>
+      </svg>
+      <div class="poem"></div>
+    </div>
+    <div class="door" data-path="doorPath-calm" data-room="calm" data-text="고요는 열림과 닫힘 사이 느린 숨으로 문을 굳힌다">
+      <svg viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+        <use class="panel" href="#doorPath-calm" />
+        <text>
+          <textPath href="#doorPath-calm"></textPath>
+        </text>
+      </svg>
+      <div class="poem"></div>
+    </div>
+    <div class="door" data-path="doorPath-anger" data-room="anger" data-text="분노는 문설주를 흔들며 지나가도 결국 닫힌 틈에 남는 열기">
+      <svg viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+        <use class="panel" href="#doorPath-anger" />
+        <text>
+          <textPath href="#doorPath-anger"></textPath>
+        </text>
+      </svg>
+      <div class="poem"></div>
+    </div>
+    <div class="door" data-path="doorPath-healing" data-room="healing" data-text="치유는 천천히 닫히며 새살을 눌러주는 얇은 문틀에서 시작된다">
+      <svg viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+        <use class="panel" href="#doorPath-healing" />
+        <text>
+          <textPath href="#doorPath-healing"></textPath>
+        </text>
+      </svg>
+      <div class="poem"></div>
+    </div>
+    <div class="door" data-path="doorPath-wander" data-room="wander" data-text="방랑은 문을 통과하는 순간마다 방향을 잃어버리는 기술">
+      <svg viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+        <use class="panel" href="#doorPath-wander" />
+        <text>
+          <textPath href="#doorPath-wander"></textPath>
+        </text>
+      </svg>
+      <div class="poem"></div>
+    </div>
+    <div class="door" data-path="doorPath-dream" data-room="dream" data-text="꿈은 닫힌 문을 통째로 들어 올려 다른 집에 걸어둔다">
+      <svg viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+        <use class="panel" href="#doorPath-dream" />
+        <text>
+          <textPath href="#doorPath-dream"></textPath>
+        </text>
+      </svg>
+      <div class="poem"></div>
+    </div>
+    <div class="door" data-path="doorPath-rain" data-room="rain" data-text="비는 문을 두드리지 않고도 방을 촉촉히 여는 언어">
+      <svg viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+        <use class="panel" href="#doorPath-rain" />
+        <text>
+          <textPath href="#doorPath-rain"></textPath>
+        </text>
+      </svg>
+      <div class="poem"></div>
+    </div>
+  </div>
+
+  <div class="entry-veil" id="entry-veil"></div>
+
+  <div class="room-layer" id="room-layer" aria-live="polite">
+    <div class="room-content">
+      <p class="room-kicker">한 줄의 문, 한 편의 방</p>
+      <h1 class="room-title" id="room-title"></h1>
+      <p class="room-line" id="room-line"></p>
+      <div class="room-body">
+        <div class="poem-text" id="room-poem"></div>
+        <div class="side-notes">
+          <div class="meta">
+            <h3>작가</h3>
+            <p id="room-author"></p>
+          </div>
+          <div class="meta">
+            <h3>편집 메모</h3>
+            <p id="room-notes"></p>
+          </div>
+          <button class="back-btn" id="back-to-gallery">다른 방으로 이동하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <svg width="0" height="0" style="position: absolute">
+    <defs>
+      <path id="doorPath-lonely"
+            d="
+              M180 520
+              L180 210
+              Q180 90 200 90
+              Q220 90 220 210
+              L220 520
+              Z" />
+      <path id="doorPath-love"
+            d="
+              M130 500
+              Q135 280 200 220
+              Q265 280 270 500
+              Q270 520 260 520
+              L140 520
+              Q130 520 130 500
+              Z" />
+      <path id="doorPath-anxiety"
+            d="
+              M135 520
+              L155 260
+              Q165 120 235 115
+              Q295 110 280 260
+              L260 520
+              Q255 535 240 535
+              L150 535
+              Q140 535 135 520
+              Z" />
+      <path id="doorPath-memory-outer"
+            d="
+              M120 510
+              L120 230
+              Q120 110 200 110
+              Q280 110 280 230
+              L280 510
+              Z" />
+      <path id="doorPath-memory-inner"
+            d="
+              M155 495
+              L155 245
+              Q155 150 200 150
+              Q245 150 245 245
+              L245 495
+              Z" />
+      <path id="doorPath-calm"
+            d="
+              M110 500
+              L110 280
+              Q110 200 200 200
+              Q290 200 290 280
+              L290 500
+              Z" />
+      <path id="doorPath-anger"
+            d="
+              M130 520
+              L130 230
+              L170 160
+              L230 150
+              L280 210
+              L280 520
+              L260 540
+              L150 540
+              Z" />
+      <path id="doorPath-healing"
+            d="
+              M150 520
+              L150 240
+              Q150 150 200 140
+              Q250 150 250 240
+              L250 520
+              Q250 540 235 545
+              L165 545
+              Q150 540 150 520
+              Z" />
+      <path id="doorPath-wander"
+            d="
+              M130 520
+              L160 210
+              Q170 140 240 150
+              L280 520
+              Q282 540 260 540
+              L150 540
+              Q128 540 130 520
+              Z" />
+      <path id="doorPath-dream"
+            d="
+              M140 520
+              L140 240
+              Q140 140 200 110
+              Q260 140 260 240
+              L260 520
+              Q260 535 245 540
+              L155 540
+              Q140 535 140 520
+              Z" />
+      <path id="doorPath-rain"
+            d="
+              M190 520
+              L190 250
+              Q190 180 175 150
+              Q200 110 225 150
+              Q210 180 210 250
+              L210 520
+              Q210 540 190 540
+              Z" />
+    </defs>
+  </svg>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
